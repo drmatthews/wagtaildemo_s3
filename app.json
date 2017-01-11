@@ -1,0 +1,19 @@
+{
+  "name": "Wagtaildemo",
+  "description": "Wagtaildemo",
+  "repository": "https://github.com/drmatthews/wagtaildemo",
+  "logo": "http://wagtail.io/static/wagtailsite/images/navlogo2.png",
+  "keywords": ["wagtail", "django"],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "wagtaildemo.settings.heroku",
+    "DJANGO_AWS_ACCESS_KEY_ID": "",
+    "DJANGO_AWS_SECRET_ACCESS_KEY": "",
+    "DJANGO_AWS_STORAGE_BUCKET_NAME": ""
+  },
+  "scripts": {
+    "postdeploy": "django-admin.py migrate && django-admin.py load_initial_data && echo 'from wagtail.wagtailimages.models import Rendition; Rendition.objects.all().delete()' | django-admin.py shell"
+  },
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ]
+}
